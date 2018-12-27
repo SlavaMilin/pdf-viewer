@@ -1,20 +1,21 @@
 import React from 'react';
+import './upload-btn.scss';
 
 const UploadBtn = ({onFileChange}) => {
   return (
-    <section>
+    <section className="upload-btn">
       <input
-        className="header__upload-btn"
+        className="upload-btn__input"
         type="file"
         id="header__upload-btn"
         onChange={onFileChange}
         hidden
       />
       <label
-        className=""
+        className="upload-btn__label"
         htmlFor="header__upload-btn"
       >
-        Загрузить презентацию
+        Загрузить PDF
       </label>
     </section>
   );

@@ -1,0 +1,20 @@
+.upload-btn {
+  display: flex;
+}
+.upload-btn__label {
+  padding-top: 50px;
+  text-align: center;
+  position: relative;
+}
+.upload-btn__label:hover {
+  opacity: 0.6;
+}
+.upload-btn__label::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  background-image: url("pdf.svg");
+}

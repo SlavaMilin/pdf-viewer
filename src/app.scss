@@ -1,0 +1,33 @@
+$background-color: #525659;
+$content-background-color: #c6c6c6;
+
+body {
+  background-color: $background-color;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  width: 1250px;
+  margin: 0 auto;
+}
+.header {
+  background-color: $content-background-color;
+  margin-bottom: 30px;
+  padding: 20px 0;
+}
+.header__inner {
+  display: flex;
+}
+.main-slide {
+  display: flex;
+  position: relative;
+}
+.slider {
+  display: flex;
+  justify-content: center;
+  padding: 25px 0;
+  background-color: $content-background-color;
+}
+.slider__wrap {
+  overflow: hidden;
+}

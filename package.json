@@ -1,0 +1,36 @@
+{
+  "name": "pdf-viewer",
+  "version": "1.0.0",
+  "description": "Программа для просмотра презентаций с возможностью показывать следующие слайды в отдельном окне.",
+  "main": "src/index.html",
+  "homepage": "https://SlavaMilin.github.io/presentation-viewer/",
+  "scripts": {
+    "test": "eslint src/**/*.js src/**/*.jsx",
+    "build": "parcel build src/index.html src/inner.html --public-url ./ -d build",
+    "start": "parcel src/index.html src/inner.html --open",
+    "serve": "npm run build && serve build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "author": "Slava Milin",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "7.2.0",
+    "@babel/plugin-proposal-class-properties": "7.2.1",
+    "@babel/preset-react": "7.0.0",
+    "babel-eslint": "10.0.1",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "eslint": "5.10.0",
+    "eslint-plugin-react": "7.11.1",
+    "gh-pages": "2.0.1",
+    "parcel-bundler": "1.10.3",
+    "sass": "1.15.2"
+  },
+  "dependencies": {
+    "moment": "2.23.0",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "react-pdf": "4.0.0"
+  }
+}

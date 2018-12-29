@@ -38,3 +38,7 @@
 .new-window__sync-btn:hover {
   opacity: 0.6;
 }
+.new-window__window-btn:disabled,
+.new-window__sync-btn:disabled {
+  opacity: 0.6;
+}

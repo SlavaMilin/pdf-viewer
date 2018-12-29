@@ -18,3 +18,9 @@
   margin-right: 5px;
   transform: rotate(180deg);
 }
+.arrows__prev:hover,
+.arrows__next:hover,
+.arrows__prev:disabled,
+.arrows__next:disabled {
+  opacity: 0.6;
+}

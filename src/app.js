@@ -9,8 +9,6 @@ import Arrows from './components/arrows/arrows';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import './app.scss';
 
-import samplePDF from './samplePDF.pdf';
-
 const options = {
   cMapUrl: 'cmaps/',
   cMapPacked: true,
@@ -30,7 +28,7 @@ export default class App extends Component {
     previewSlideWidth: 1200,
     startLectureHours: '19',
     startLectureMinutes: '00',
-    file: samplePDF,
+    file: null,
     pageWidth: window.screen.width,
     savedSlides: {},
   };
@@ -262,7 +260,7 @@ export default class App extends Component {
 
   render() {
     const {
-      pageNumber, numPages, file, previewSlideWidth, pageWidth, currentPreloadCount, inputValue, fullScreen, startLectureHours, startLectureMinutes, savedSlides, showStatistic, isRecord
+      pageNumber, numPages, file, previewSlideWidth, pageWidth, currentPreloadCount, inputValue, fullScreen, startLectureHours, startLectureMinutes, savedSlides, showStatistic, isRecord, secondWindow
     } = this.state;
     const sliderWidth = fullScreen ? pageWidth : previewSlideWidth;
 
@@ -300,6 +298,8 @@ export default class App extends Component {
               <NewWindow
                 onSecondWindowClick={this.onSecondWindowClick}
                 onSyncBtnClick={this.onSyncBtnClick}
+                numPages={numPages}
+                secondWindow={!secondWindow}
               />
             </div>
 
@@ -307,6 +307,7 @@ export default class App extends Component {
               <Arrows
                 onPrevSlideBtnClick={this.onPrevSlideBtnClick}
                 onNextSlideBtnClick={this.onNextSlideBtnClick}
+                numPages={numPages}
               />
             </div>
 

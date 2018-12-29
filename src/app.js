@@ -3,6 +3,7 @@ import {Document, Page} from 'react-pdf/dist/entry.parcel';
 import moment from 'moment';
 
 import UploadBtn from './components/upload-btn/upload-btn';
+import NewWindow from './components/new-window/new-window';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import './app.scss';
@@ -290,22 +291,16 @@ export default class App extends Component {
         <header className="header">
           <section className="container header__inner">
 
-            <UploadBtn onFileChange={this.onFileChange} />
+            <div className="header__upload-btn">
+              <UploadBtn onFileChange={this.onFileChange} />
+            </div>
 
-            <section>
-              <button
-                type="button"
-                onClick={this.onSecondWindowClick}
-              >
-                Второе окно
-              </button>
-              <button
-                type="button"
-                onClick={this.onSyncBtnClick}
-              >
-                Синхронизовать окна
-              </button>
-            </section>
+            <div className="header__new-window">
+              <NewWindow
+                onSecondWindowClick={this.onSecondWindowClick}
+                onSyncBtnClick={this.onSyncBtnClick}
+              />
+            </div>
 
             <section>
               <button

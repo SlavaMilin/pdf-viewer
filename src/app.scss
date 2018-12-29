@@ -6,6 +6,11 @@ body {
   height: 100vh;
   margin: 0;
 }
+button,
+label {
+  font: inherit;
+  cursor: pointer;
+}
 .container {
   width: 1250px;
   margin: 0 auto;
@@ -17,6 +22,10 @@ body {
 }
 .header__inner {
   display: flex;
+}
+.header__upload-btn,
+.header__new-window {
+  margin-right: 10px;
 }
 .main-slide {
   display: flex;

@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import UploadBtn from './components/upload-btn/upload-btn';
 import NewWindow from './components/new-window/new-window';
+import Arrows from './components/arrows/arrows';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import './app.scss';
@@ -302,20 +303,12 @@ export default class App extends Component {
               />
             </div>
 
-            <section>
-              <button
-                type="button"
-                onClick={this.onPrevSlideBtnClick}
-              >
-                Предыдущий слайд
-              </button>
-              <button
-                type="button"
-                onClick={this.onNextSlideBtnClick}
-              >
-                Следующий слайд
-              </button>
-            </section>
+            <div className="header__arrows">
+              <Arrows
+                onPrevSlideBtnClick={this.onPrevSlideBtnClick}
+                onNextSlideBtnClick={this.onNextSlideBtnClick}
+              />
+            </div>
 
             <section>
               <button

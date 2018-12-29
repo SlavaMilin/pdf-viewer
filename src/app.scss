@@ -18,13 +18,14 @@ label {
 .header {
   background-color: $content-background-color;
   margin-bottom: 30px;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 .header__inner {
   display: flex;
 }
 .header__upload-btn,
-.header__new-window {
+.header__new-window,
+.header__arrows {
   margin-right: 10px;
 }
 .main-slide {

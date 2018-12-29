@@ -1,0 +1,20 @@
+.arrows {
+  display: flex;
+}
+.arrows__prev,
+.arrows__next {
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0;
+  width: 35px;
+  height: 35px;
+  background-size: 35px;
+  margin-top: 3px;
+  background-image: url("right-arrow.svg");
+}
+.arrows__prev {
+  margin-right: 5px;
+  transform: rotate(180deg);
+}

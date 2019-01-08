@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Document, Page} from 'react-pdf/dist/entry.parcel';
 import moment from 'moment';
 
-import UploadBtn from './components/upload-btn/upload-btn';
-import NewWindow from './components/new-window/new-window';
-import Arrows from './components/arrows/arrows';
-
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import './app.scss';
 
@@ -290,43 +286,59 @@ export default class App extends Component {
         <header className="header">
           <section className="container header__inner">
 
-            <div className="header__upload-btn">
-              <UploadBtn onFileChange={this.onFileChange} />
-            </div>
-
-            <div className="header__new-window">
-              <NewWindow
-                onSecondWindowClick={this.onSecondWindowClick}
-                onSyncBtnClick={this.onSyncBtnClick}
-                numPages={numPages}
-                secondWindow={!secondWindow}
+            <section className="header__upload-btn upload-btn">
+              <input
+                className="upload-btn__input"
+                type="file"
+                id="header__upload-btn"
+                onChange={this.onFileChange}
+                hidden
               />
-            </div>
-
-            <div className="header__arrows">
-              <Arrows
-                onPrevSlideBtnClick={this.onPrevSlideBtnClick}
-                onNextSlideBtnClick={this.onNextSlideBtnClick}
-                numPages={numPages}
-              />
-            </div>
-
-            <section>
-              <button
-                type="button"
-                onClick={this.onFirstSlideBtnClick}
+              <label
+                className="upload-btn__label"
+                htmlFor="header__upload-btn"
               >
-                Первый слайд
+                Загрузить PDF
+              </label>
+            </section>
+
+            <section className="header__new-window new-window">
+              <button
+                className="new-window__window-btn"
+                type="button"
+                onClick={this.onSecondWindowClick}
+                disabled={!numPages}
+              >
+                Второе окно
               </button>
               <button
+                className="new-window__sync-btn"
                 type="button"
-                onClick={this.onLastSlideBtnClick}
+                onClick={this.onSyncBtnClick}
+                disabled={!secondWindow}
               >
-                Последний слайд
+                Синхр. окна
               </button>
             </section>
 
-            <section>
+            <section className="header__arrows arrows">
+              <button
+                className="arrows__prev"
+                type="button"
+                onClick={this.onPrevSlideBtnClick}
+                disabled={!numPages}
+              >
+                Предыдущий слайд
+              </button>
+              <button
+                className="arrows__next"
+                type="button"
+                onClick={this.onNextSlideBtnClick}
+                disabled={!numPages}
+              >
+                Следующий слайд
+              </button>
+
               <input
                 type="number"
                 min="1"
@@ -342,6 +354,27 @@ export default class App extends Component {
                 value={numPages || '-'}
                 disabled
               />
+
+              <button
+                type="button"
+                onClick={this.onFirstSlideBtnClick}
+              >
+                Первый слайд
+              </button>
+              <button
+                type="button"
+                onClick={this.onLastSlideBtnClick}
+              >
+                Последний слайд
+              </button>
+            </section>
+
+            <section>
+
+            </section>
+
+            <section>
+
             </section>
 
             <section>

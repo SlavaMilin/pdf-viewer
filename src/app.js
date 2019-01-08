@@ -378,10 +378,12 @@ export default class App extends Component {
 
             </div>
 
-            <section>
+            <section className="fullscreen">
               <button
+                className="fullscreen__btn"
                 type="button"
                 onClick={this.onFullScreenBtnClick}
+                disabled={!numPages}
               >
                 fullscreen
               </button>

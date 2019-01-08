@@ -183,3 +183,19 @@ label {
 
 //lecture
 
+//fullscreen
+
+.fullscreen__btn {
+  font-size: 0;
+  padding: 0;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  background: url("img/scale-screen.svg") no-repeat;
+  background-size: 40px;
+}
+.fullscreen__btn:hover,
+.fullscreen__btn:focus,
+.fullscreen__btn:disabled {
+  opacity: 0.6;
+}

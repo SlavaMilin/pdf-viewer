@@ -286,25 +286,23 @@ export default class App extends Component {
         <header className="header">
           <section className="container header__inner">
 
-            <section className="header__upload-btn upload-btn">
+            <section className="header__controls controls">
               <input
-                className="upload-btn__input"
+                className="controls__input"
                 type="file"
-                id="header__upload-btn"
+                id="controls__upload-btn"
                 onChange={this.onFileChange}
                 hidden
               />
               <label
-                className="upload-btn__label"
-                htmlFor="header__upload-btn"
+                className="controls__label"
+                htmlFor="controls__upload-btn"
               >
                 Загрузить PDF
               </label>
-            </section>
 
-            <section className="header__new-window new-window">
               <button
-                className="new-window__window-btn"
+                className="controls__window-btn"
                 type="button"
                 onClick={this.onSecondWindowClick}
                 disabled={!numPages}
@@ -312,7 +310,7 @@ export default class App extends Component {
                 Второе окно
               </button>
               <button
-                className="new-window__sync-btn"
+                className="controls__sync-btn"
                 type="button"
                 onClick={this.onSyncBtnClick}
                 disabled={!secondWindow}
@@ -321,61 +319,64 @@ export default class App extends Component {
               </button>
             </section>
 
-            <section className="header__arrows arrows">
-              <button
-                className="arrows__prev"
-                type="button"
-                onClick={this.onPrevSlideBtnClick}
-                disabled={!numPages}
-              >
-                Предыдущий слайд
-              </button>
-              <button
-                className="arrows__next"
-                type="button"
-                onClick={this.onNextSlideBtnClick}
-                disabled={!numPages}
-              >
-                Следующий слайд
-              </button>
+            <div>
+              <section className="arrows">
+                <button
+                  className="arrows__first"
+                  type="button"
+                  onClick={this.onFirstSlideBtnClick}
+                  disabled={!numPages}
+                >
+                  Первый слайд
+                </button>
 
-              <input
-                type="number"
-                min="1"
-                max={numPages}
-                value={inputValue}
-                onChange={this.onChangePageNumber}
-                onBlur={this.onSubmitInput}
-                disabled={!numPages}
-              />
-              из
-              <input
-                type="test"
-                value={numPages || '-'}
-                disabled
-              />
+                <button
+                  className="arrows__prev"
+                  type="button"
+                  onClick={this.onPrevSlideBtnClick}
+                  disabled={!numPages}
+                >
+                  Предыдущий слайд
+                </button>
 
-              <button
-                type="button"
-                onClick={this.onFirstSlideBtnClick}
-              >
-                Первый слайд
-              </button>
-              <button
-                type="button"
-                onClick={this.onLastSlideBtnClick}
-              >
-                Последний слайд
-              </button>
-            </section>
+                <div className="arrows__numbers-inner">
+                  <input
+                    className="arrows__value"
+                    type="text"
+                    value={inputValue}
+                    onChange={this.onChangePageNumber}
+                    onBlur={this.onSubmitInput}
+                    disabled={!numPages}
+                  />
+                  <span className="arrows__slash"> / </span>
+                  <input
+                    className="arrows__value"
+                    value={numPages || '0'}
+                    type="text"
+                    disabled
+                  />
+                </div>
 
-            <section>
+                <button
+                  className="arrows__next"
+                  type="button"
+                  onClick={this.onNextSlideBtnClick}
+                  disabled={!numPages}
+                >
+                  Следующий слайд
+                </button>
 
-            </section>
+                <button
+                  className="arrows__last"
+                  type="button"
+                  onClick={this.onLastSlideBtnClick}
+                  disabled={!numPages}
+                >
+                  Последний слайд
+                </button>
+              </section>
 
-            <section>
-
-            </section>
+            </div>
 
             <section>
               <button
@@ -386,7 +387,7 @@ export default class App extends Component {
               </button>
             </section>
 
-            <section>
+            <section className="lecture">
               <span>Старт лекции: </span>
               <select onChange={this.onStartLectureHoursChange}>
                 {Array.from(new Array(24), (it, i) => (

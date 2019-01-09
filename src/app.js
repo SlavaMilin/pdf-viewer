@@ -266,6 +266,7 @@ export default class App extends Component {
           return (
             <div key={`timecode-${it}`}>
               <button
+                className="saved-slides__btn"
                 type="button"
                 data-index={it}
                 onClick={this.onDelTimecodeClick}
@@ -319,8 +320,8 @@ export default class App extends Component {
               </button>
             </section>
 
-            <div>
-              <section className="arrows">
+            <div className="header__slides-wrap">
+              <section className="header__arrows arrows">
                 <button
                   className="arrows__first"
                   type="button"
@@ -376,7 +377,60 @@ export default class App extends Component {
                 </button>
               </section>
 
+              <section className="slide-title">
+                <p className="slide-title__title">Заголовок слайда:</p>
+                <input
+                  className="slide-title__input"
+                  type="text"
+                  placeholder="Заголовок слайда"
+                  value={savedSlides[pageNumber] ? savedSlides[pageNumber].title : ''}
+                  onChange={this.onSlideTitleChange}
+                  disabled={!numPages}
+                />
+
+                <button
+                  className={`slide-title__statistic-toggle ${showStatistic ? 'slide-title__statistic-toggle--active' : null}`}
+                  type="button"
+                  onClick={this.onShowStatisticClick}
+                >
+                  Показать/скрыть статистику
+                </button>
+              </section>
+
             </div>
+
+            <section className="lecture">
+              <div>
+                <span>Старт лекции: </span>
+                <select onChange={this.onStartLectureHoursChange}>
+                  {Array.from(new Array(24), (it, i) => (
+                    <option key={`${i}-hours`} value={i} selected={i === parseInt(startLectureHours)}>{i}</option>
+                  ))}
+                </select>
+                <span> : </span>
+                <select onChange={this.onStartLectureMinutesChange}>
+                  {Array.from(new Array(60), (it, i) => {
+                    i = i < 10 ? `0${i}` : i;
+                    return (
+                      <option
+                        key={`${i}-minutes`}
+                        value={i}
+                        selected={parseInt(i) === parseInt(startLectureMinutes)}
+                      >
+                        {i}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <button
+                className={`lecture__btn ${isRecord ? 'lecture__btn--rec-on' : ''}`}
+                type="button"
+                onClick={this.onStartRecordClick}
+              >
+                {isRecord ? 'Выключить' : 'Включить'} запись таймингов
+              </button>
+            </section>
 
             <section className="fullscreen">
               <button
@@ -386,58 +440,6 @@ export default class App extends Component {
                 disabled={!numPages}
               >
                 fullscreen
-              </button>
-            </section>
-
-            <section className="lecture">
-              <span>Старт лекции: </span>
-              <select onChange={this.onStartLectureHoursChange}>
-                {Array.from(new Array(24), (it, i) => (
-                  <option key={`${i}-hours`} value={i} selected={i === parseInt(startLectureHours)}>{i}</option>
-                ))}
-              </select>
-              <span> : </span>
-              <select onChange={this.onStartLectureMinutesChange}>
-                {Array.from(new Array(60), (it, i) => {
-                  i = i < 10 ? `0${i}` : i;
-                  return (
-                    <option
-                      key={`${i}-minutes`}
-                      value={i}
-                      selected={parseInt(i) === parseInt(startLectureMinutes)}
-                    >
-                      {i}
-                    </option>
-                  );
-                })}
-              </select>
-              <button
-                type="button"
-                onClick={this.onStartRecordClick}
-              >
-                {isRecord ? 'Выключить' : 'Включить'} запись таймингов
-              </button>
-            </section>
-
-            <section>
-              <button type="button">Запомнить слайд</button>
-              <input
-                type="text"
-                placeholder="Заголовок слайда"
-                value={savedSlides[pageNumber] ? savedSlides[pageNumber].title : ''}
-                onChange={this.onSlideTitleChange}
-              />
-              <button
-                type="button"
-              >
-                Сохранить слайды
-              </button>
-
-              <button
-                type="button"
-                onClick={this.onShowStatisticClick}
-              >
-                {showStatistic ? 'Скрыть статистику' : 'Показать статистику'}
               </button>
             </section>
 

@@ -37,6 +37,11 @@ label {
 .slider__wrap {
   overflow: hidden;
 }
+.header__slides-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 //controls
 
@@ -121,25 +126,18 @@ label {
   width: 35px;
   height: 35px;
   background-size: 35px;
-  margin-top: 3px;
+  margin-top: 1px;
   background-image: url("img/right-arrow.svg");
 }
 .arrows__prev {
   background-image: url("img/right-arrow.svg");
   transform: rotate(180deg);
 }
-.arrows__first,
 .arrows__last {
-  top: 4px;
-  width: 25px;
-  height: 25px;
-  background-size: 25px;
-}
-.arrows__last {
-  background-image: url("img/end-arrow.svg");
+  background-image: url("img/skip.svg");
 }
 .arrows__first {
-  background-image: url("img/end-arrow.svg");
+  background-image: url("img/skip.svg");
   transform: rotate(180deg);
 }
 .arrows__prev:hover,
@@ -152,11 +150,9 @@ label {
 .arrows__last:disabled {
   opacity: 0.6;
 }
-
 .arrows__slash {
   padding: 0 5px;
 }
-
 .arrows__value {
   width: 36px;
   height: 36px;
@@ -183,6 +179,29 @@ label {
 
 //lecture
 
+.lecture {
+  margin-top: 10px;
+}
+
+.lecture__btn {
+  position: relative;
+  padding: 3px 0;
+  margin-top: 17px;
+  width: 220px;
+}
+.lecture__btn::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -5px;
+  width: 35px;
+  height: 35px;
+  background-size: 35px;
+}
+.lecture__btn--rec-on::after {
+  background-image: url("img/rec.svg");
+}
+
 //fullscreen
 
 .fullscreen__btn {
@@ -198,4 +217,42 @@ label {
 .fullscreen__btn:focus,
 .fullscreen__btn:disabled {
   opacity: 0.6;
+}
+
+//slide-title
+
+.slide-title {
+  display: flex;
+  align-items: center;
+}
+.slide-title__title {
+  margin-right: 5px;
+}
+.slide-title__input {
+  width: 300px;
+  height: 20px;
+}
+.slide-title__statistic-toggle {
+  width: 26px;
+  height: 26px;
+  font-size: 0;
+  border: 0;
+  padding: 0;
+  background: url("img/show-more-button.svg") no-repeat;
+  background-size: 26px;
+}
+.slide-title__statistic-toggle--active {
+  background-image: url("img/show-less-fold-button.svg");
+}
+
+//saved-slides
+
+.saved-slides__btn {
+  margin-right: 15px;
+  width: 10px;
+  height: 10px;
+  border: 0;
+  padding: 0;
+  background: url("img/cross.svg") no-repeat;
+  background-size: 10px;
 }

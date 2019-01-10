@@ -39,6 +39,17 @@ export default class App extends Component {
     document.removeEventListener('webkitfullscreenchange', this.onFullScreenExit);
   };
 
+  componentDidUpdate = () => {
+    const {isRecord, startLectureHours} = this.state;
+    const isLectureStart = moment().format('HH') === startLectureHours;
+
+    if (!isRecord && isLectureStart) {
+      this.setState({
+        isRecord: true
+      });
+    }
+  };
+
 
   onDocumentLoadSuccess = (document) => {
     const {numPages} = document;

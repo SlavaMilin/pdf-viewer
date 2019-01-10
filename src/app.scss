@@ -5,6 +5,7 @@ body {
   background-color: $background-color;
   height: 100vh;
   margin: 0;
+  font-family: "Arial", sans-serif;
 }
 button,
 label {
@@ -22,7 +23,12 @@ label {
 }
 .header__inner {
   display: flex;
-  justify-content: space-between;
+}
+.header__controls {
+  margin-right: auto;
+}
+.header__lecture {
+  margin-left: auto;
 }
 .main-slide {
   display: flex;
@@ -48,7 +54,8 @@ label {
 .controls {
   display: flex;
   justify-content: space-between;
-  width: 205px;
+  align-items: flex-start;
+  width: 215px;
 }
 .controls__label {
   padding-top: 50px;
@@ -113,6 +120,7 @@ label {
   align-items: flex-start;
   justify-content: space-between;
   width: 240px;
+  padding-top: 10px;
 }
 .arrows__prev,
 .arrows__next,
@@ -179,21 +187,18 @@ label {
 
 //lecture
 
-.lecture {
-  margin-top: 10px;
-}
-
 .lecture__btn {
   position: relative;
   padding: 3px 0;
-  margin-top: 17px;
-  width: 220px;
+  margin-top: 5px;
+  width: 240px;
+  font-size: 13px;
 }
 .lecture__btn::after {
   content: '';
   position: absolute;
   right: -40px;
-  top: -5px;
+  top: -8px;
   width: 35px;
   height: 35px;
   background-size: 35px;
@@ -225,12 +230,10 @@ label {
   display: flex;
   align-items: center;
 }
-.slide-title__title {
-  margin-right: 5px;
-}
 .slide-title__input {
-  width: 300px;
+  width: 350px;
   height: 20px;
+  margin-top: 8px;
 }
 .slide-title__statistic-toggle {
   width: 26px;

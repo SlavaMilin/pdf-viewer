@@ -320,65 +320,109 @@ export default class App extends Component {
               </button>
             </section>
 
-            <div className="header__slides-wrap">
-              <section className="header__arrows arrows">
-                <button
-                  className="arrows__first"
-                  type="button"
-                  onClick={this.onFirstSlideBtnClick}
-                  disabled={!numPages}
-                >
-                  Первый слайд
-                </button>
+            <section className="header__arrows arrows">
+              <button
+                className="arrows__first"
+                type="button"
+                onClick={this.onFirstSlideBtnClick}
+                disabled={!numPages}
+              >
+                Первый слайд
+              </button>
 
-                <button
-                  className="arrows__prev"
-                  type="button"
-                  onClick={this.onPrevSlideBtnClick}
-                  disabled={!numPages}
-                >
-                  Предыдущий слайд
-                </button>
+              <button
+                className="arrows__prev"
+                type="button"
+                onClick={this.onPrevSlideBtnClick}
+                disabled={!numPages}
+              >
+                Предыдущий слайд
+              </button>
 
-                <div className="arrows__numbers-inner">
-                  <input
-                    className="arrows__value"
-                    type="text"
-                    value={inputValue}
-                    onChange={this.onChangePageNumber}
-                    onBlur={this.onSubmitInput}
-                    disabled={!numPages}
-                  />
-                  <span className="arrows__slash"> / </span>
-                  <input
-                    className="arrows__value"
-                    value={numPages || '0'}
-                    type="text"
-                    disabled
-                  />
+              <div className="arrows__numbers-inner">
+                <input
+                  className="arrows__value"
+                  type="text"
+                  value={inputValue}
+                  onChange={this.onChangePageNumber}
+                  onBlur={this.onSubmitInput}
+                  disabled={!numPages}
+                />
+                <span className="arrows__slash"> / </span>
+                <input
+                  className="arrows__value"
+                  value={numPages || '0'}
+                  type="text"
+                  disabled
+                />
+              </div>
+
+              <button
+                className="arrows__next"
+                type="button"
+                onClick={this.onNextSlideBtnClick}
+                disabled={!numPages}
+              >
+                Следующий слайд
+              </button>
+
+              <button
+                className="arrows__last"
+                type="button"
+                onClick={this.onLastSlideBtnClick}
+                disabled={!numPages}
+              >
+                Последний слайд
+              </button>
+            </section>
+
+            <div className="header__lecture">
+              <section className="lecture">
+                <div>
+                  <span>Старт лекции: </span>
+                  <select
+                    onChange={this.onStartLectureHoursChange}
+                    value={parseInt(startLectureHours)}
+                  >
+                    {Array.from(new Array(24), (it, i) => (
+                      <option
+                        key={`${i}-hours`}
+                        value={i}
+                      >
+                        {i}
+                      </option>
+                    ))}
+                  </select>
+                  <span> : </span>
+                  <select
+                    onChange={this.onStartLectureMinutesChange}
+                    value={startLectureMinutes}
+                  >
+                    {Array.from(new Array(60), (it, i) => {
+                      i = i < 10 ? `0${i}` : i;
+                      return (
+                        <option
+                          key={`${i}-minutes`}
+                          value={i}
+                        >
+                          {i}
+                        </option>
+                      );
+                    })}
+                  </select>
+
+
                 </div>
-
                 <button
-                  className="arrows__next"
+                  className={`lecture__btn ${isRecord ? 'lecture__btn--rec-on' : ''}`}
                   type="button"
-                  onClick={this.onNextSlideBtnClick}
-                  disabled={!numPages}
+                  onClick={this.onStartRecordClick}
                 >
-                  Следующий слайд
-                </button>
-
-                <button
-                  className="arrows__last"
-                  type="button"
-                  onClick={this.onLastSlideBtnClick}
-                  disabled={!numPages}
-                >
-                  Последний слайд
+                  {isRecord ? 'Выключить' : 'Включить'} запись таймингов
                 </button>
               </section>
 
               <section className="slide-title">
-                <p className="slide-title__title">Заголовок слайда:</p>
                 <input
                   className="slide-title__input"
                   type="text"
@@ -396,41 +440,7 @@ export default class App extends Component {
                   Показать/скрыть статистику
                 </button>
               </section>
-
             </div>
-
-            <section className="lecture">
-              <div>
-                <span>Старт лекции: </span>
-                <select onChange={this.onStartLectureHoursChange}>
-                  {Array.from(new Array(24), (it, i) => (
-                    <option key={`${i}-hours`} value={i} selected={i === parseInt(startLectureHours)}>{i}</option>
-                  ))}
-                </select>
-                <span> : </span>
-                <select onChange={this.onStartLectureMinutesChange}>
-                  {Array.from(new Array(60), (it, i) => {
-                    i = i < 10 ? `0${i}` : i;
-                    return (
-                      <option
-                        key={`${i}-minutes`}
-                        value={i}
-                        selected={parseInt(i) === parseInt(startLectureMinutes)}
-                      >
-                        {i}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              <button
-                className={`lecture__btn ${isRecord ? 'lecture__btn--rec-on' : ''}`}
-                type="button"
-                onClick={this.onStartRecordClick}
-              >
-                {isRecord ? 'Выключить' : 'Включить'} запись таймингов
-              </button>
-            </section>
 
             <section className="fullscreen">
               <button

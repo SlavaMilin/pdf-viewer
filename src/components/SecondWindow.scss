@@ -10,10 +10,10 @@ body {
   margin: 0 auto;
   padding-top: 20px;
 }
-.react-pdf__Page:not(:last-of-type) {
+.second-window-page:not(:last-of-type) {
   margin-bottom: 20px;
 }
-.react-pdf__Page:first-of-type {
+.second-window-page:first-of-type {
   outline: 3px solid red;
   box-sizing: border-box;
 }

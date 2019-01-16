@@ -504,6 +504,7 @@ export default class App extends Component {
                   key={`page-${pageNumber + i}`}
                   pageNumber={pageNumber + i}
                   width={sliderWidth}
+                  loading=""
                 />
               ))}
             </Document>

@@ -88,8 +88,10 @@ export default class SecondWindow extends Component {
           {Array.from(new Array(renderPages), (el, i) => (
             <Page
               key={`page-${pageNumber + i}`}
+              className="second-window-page"
               pageNumber={pageNumber + i}
               width={slideWidth}
+              loading=""
               renderAnnotationLayer={false}
               renderTextLayer={false}
             />

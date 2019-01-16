@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {Document, Page} from 'react-pdf/dist/entry.parcel';
-import moment from 'moment';
+import React, { Component } from "react";
+import { Document, Page } from "react-pdf/dist/entry.parcel";
+import moment from "moment";
 
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import './app.scss';
+import "react-pdf/dist/Page/AnnotationLayer.css";
+import "./App.scss";
 
 const options = {
-  cMapUrl: 'cmaps/',
-  cMapPacked: true,
+  cMapUrl: "cmaps/",
+  cMapPacked: true
 };
 
 export default class App extends Component {
@@ -22,26 +22,33 @@ export default class App extends Component {
     currentPreloadCount: 2,
     maxPreload: 2,
     previewSlideWidth: 1200,
-    startLectureHours: '19',
-    startLectureMinutes: '00',
+    startLectureHours: "19",
+    startLectureMinutes: "00",
     file: null,
     pageWidth: window.screen.width,
-    savedSlides: {},
+    savedSlides: {}
   };
 
   componentDidMount = () => {
-    document.addEventListener('keydown', this.onKeyDown);
-    document.addEventListener('webkitfullscreenchange', this.onFullScreenExit, false);
+    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener(
+      "webkitfullscreenchange",
+      this.onFullScreenExit,
+      false
+    );
   };
 
   componentWillUnmount = () => {
-    document.removeEventListener('keydown', this.onKeyDown);
-    document.removeEventListener('webkitfullscreenchange', this.onFullScreenExit);
+    document.removeEventListener("keydown", this.onKeyDown);
+    document.removeEventListener(
+      "webkitfullscreenchange",
+      this.onFullScreenExit
+    );
   };
 
   componentDidUpdate = () => {
-    const {isRecord, startLectureHours} = this.state;
-    const isLectureStart = moment().format('HH') === startLectureHours;
+    const { isRecord, startLectureHours } = this.state;
+    const isLectureStart = moment().format("HH") === startLectureHours;
 
     if (!isRecord && isLectureStart) {
       this.setState({
@@ -50,24 +57,23 @@ export default class App extends Component {
     }
   };
 
-
-  onDocumentLoadSuccess = (document) => {
-    const {numPages} = document;
+  onDocumentLoadSuccess = document => {
+    const { numPages } = document;
 
     this.setState({
       numPages,
-      pageNumber: 1,
+      pageNumber: 1
     });
   };
 
-  onFileChange = (e) => {
+  onFileChange = e => {
     const file = e.target.files[0];
     const pageNumber = 1;
-    const {secondWindow} = this.state;
+    const { secondWindow } = this.state;
 
     if (secondWindow) {
-      secondWindow.postMessage({file}, '*');
-      secondWindow.postMessage({pageNumber}, '*');
+      secondWindow.postMessage({ file }, "*");
+      secondWindow.postMessage({ pageNumber }, "*");
     }
     this.setState({
       file,
@@ -75,24 +81,24 @@ export default class App extends Component {
     });
   };
 
-  onKeyDown = (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+  onKeyDown = e => {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       this.nextSlide();
     }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       this.prevSlide();
     }
   };
 
-  onChangePageNumber = (e) => {
+  onChangePageNumber = e => {
     const inputValue = e.target.value;
     this.setState({
       inputValue
     });
   };
 
-  onSubmitInput = (e) => {
-    const {numPages} = this.state;
+  onSubmitInput = e => {
+    const { numPages } = this.state;
     let pageNumber = parseInt(e.target.value, 10);
 
     if (pageNumber < 1) {
@@ -119,7 +125,7 @@ export default class App extends Component {
   };
 
   onLastSlideBtnClick = () => {
-    const {numPages} = this.state;
+    const { numPages } = this.state;
     this.changeSlide(numPages);
   };
 
@@ -140,13 +146,13 @@ export default class App extends Component {
   };
 
   onSecondWindowClick = () => {
-    const {file, pageNumber} = this.state;
-    const secondWindow = window.open('./inner', 'secondWindow');
+    const { file, pageNumber } = this.state;
+    const secondWindow = window.open("./inner", "secondWindow");
 
     if (file) {
       setTimeout(() => {
-        secondWindow.postMessage({file}, '*');
-        secondWindow.postMessage({pageNumber}, '*');
+        secondWindow.postMessage({ file }, "*");
+        secondWindow.postMessage({ pageNumber }, "*");
       }, 2000);
     }
 
@@ -156,15 +162,15 @@ export default class App extends Component {
   };
 
   onSyncBtnClick = () => {
-    const {pageNumber, secondWindow} = this.state;
+    const { pageNumber, secondWindow } = this.state;
 
     if (secondWindow) {
-      secondWindow.postMessage({pageNumber}, '*');
+      secondWindow.postMessage({ pageNumber }, "*");
     }
   };
 
-  onSlideTitleChange = (e) => {
-    const {savedSlides, pageNumber} = this.state;
+  onSlideTitleChange = e => {
+    const { savedSlides, pageNumber } = this.state;
 
     savedSlides[pageNumber] = {
       title: e.target.value,
@@ -177,31 +183,31 @@ export default class App extends Component {
   };
 
   onShowStatisticClick = () => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       showStatistic: !prevState.showStatistic
     }));
   };
 
   onStartRecordClick = () => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       isRecord: !prevState.isRecord
     }));
   };
 
-  onStartLectureHoursChange = (e) => {
+  onStartLectureHoursChange = e => {
     this.setState({
-      startLectureHours: e.target.value,
+      startLectureHours: e.target.value
     });
   };
 
-  onStartLectureMinutesChange = (e) => {
+  onStartLectureMinutesChange = e => {
     this.setState({
-      startLectureMinutes: e.target.value,
+      startLectureMinutes: e.target.value
     });
   };
 
-  onDelTimecodeClick = (e) => {
-    const savedSlides = {...this.state.savedSlides};
+  onDelTimecodeClick = e => {
+    const savedSlides = { ...this.state.savedSlides };
     delete savedSlides[e.target.dataset.index];
 
     this.setState({
@@ -210,18 +216,18 @@ export default class App extends Component {
   };
 
   nextSlide = () => {
-    const {pageNumber} = this.state;
+    const { pageNumber } = this.state;
     this.changeSlide(pageNumber + 1);
   };
 
   prevSlide = () => {
-    const {pageNumber} = this.state;
+    const { pageNumber } = this.state;
     this.changeSlide(pageNumber - 1);
   };
 
-  changeSlide = (pageNumber) => {
+  changeSlide = pageNumber => {
     pageNumber = parseInt(pageNumber, 10);
-    const {numPages, maxPreload, secondWindow} = this.state;
+    const { numPages, maxPreload, secondWindow } = this.state;
 
     if (pageNumber < 1 || pageNumber > numPages) {
       return null;
@@ -234,7 +240,7 @@ export default class App extends Component {
     }
 
     if (secondWindow) {
-      secondWindow.postMessage({pageNumber}, '*');
+      secondWindow.postMessage({ pageNumber }, "*");
     }
 
     this.recordSlideTime(pageNumber);
@@ -247,15 +253,18 @@ export default class App extends Component {
   };
 
   getTimeCode = () => {
-    const {startLectureHours, startLectureMinutes} = this.state;
+    const { startLectureHours, startLectureMinutes } = this.state;
 
-    const startLecture = moment(`${startLectureHours}:${startLectureMinutes}:00`, 'HH:mm:ss');
+    const startLecture = moment(
+      `${startLectureHours}:${startLectureMinutes}:00`,
+      "HH:mm:ss"
+    );
 
-    return moment.utc(moment().diff(startLecture)).format('HH:mm:ss');
+    return moment.utc(moment().diff(startLecture)).format("HH:mm:ss");
   };
 
-  recordSlideTime = (pageNumber) => {
-    const {savedSlides, isRecord} = this.state;
+  recordSlideTime = pageNumber => {
+    const { savedSlides, isRecord } = this.state;
 
     if (isRecord && pageNumber in savedSlides) {
       savedSlides[pageNumber].time.push(this.getTimeCode());
@@ -267,37 +276,47 @@ export default class App extends Component {
 
   render() {
     const {
-      pageNumber, numPages, file, previewSlideWidth, pageWidth, currentPreloadCount, inputValue, fullScreen, startLectureHours, startLectureMinutes, savedSlides, showStatistic, isRecord, secondWindow
+      pageNumber,
+      numPages,
+      file,
+      previewSlideWidth,
+      pageWidth,
+      currentPreloadCount,
+      inputValue,
+      fullScreen,
+      startLectureHours,
+      startLectureMinutes,
+      savedSlides,
+      showStatistic,
+      isRecord,
+      secondWindow
     } = this.state;
     const sliderWidth = fullScreen ? pageWidth : previewSlideWidth;
 
     const slidesTimeItems = () => {
-      return (
-        Object.keys(savedSlides).map((it) => {
-          return (
-            <div key={`timecode-${it}`}>
-              <button
-                className="saved-slides__btn"
-                type="button"
-                data-index={it}
-                onClick={this.onDelTimecodeClick}
-              >
-                {}
-              </button>
-              <span>
-                {savedSlides[it].time.join(', ')}#{savedSlides[it].title}
-              </span>
-            </div>
-          );
-        })
-      );
+      return Object.keys(savedSlides).map(it => {
+        return (
+          <div key={`timecode-${it}`}>
+            <button
+              className="saved-slides__btn"
+              type="button"
+              data-index={it}
+              onClick={this.onDelTimecodeClick}
+            >
+              {}
+            </button>
+            <span>
+              {savedSlides[it].time.join(", ")}#{savedSlides[it].title}
+            </span>
+          </div>
+        );
+      });
     };
 
     return (
       <div>
         <header className="header">
           <section className="container header__inner">
-
             <section className="header__controls controls">
               <input
                 className="controls__input"
@@ -306,10 +325,7 @@ export default class App extends Component {
                 onChange={this.onFileChange}
                 hidden
               />
-              <label
-                className="controls__label"
-                htmlFor="controls__upload-btn"
-              >
+              <label className="controls__label" htmlFor="controls__upload-btn">
                 Загрузить PDF
               </label>
 
@@ -362,7 +378,7 @@ export default class App extends Component {
                 <span className="arrows__slash"> / </span>
                 <input
                   className="arrows__value"
-                  value={numPages || '0'}
+                  value={numPages || "0"}
                   type="text"
                   disabled
                 />
@@ -395,10 +411,7 @@ export default class App extends Component {
                   value={parseInt(startLectureHours)}
                 >
                   {Array.from(new Array(24), (it, i) => (
-                    <option
-                      key={`${i}-hours`}
-                      value={i}
-                    >
+                    <option key={`${i}-hours`} value={i}>
                       {i}
                     </option>
                   ))}
@@ -411,21 +424,20 @@ export default class App extends Component {
                   {Array.from(new Array(60), (it, i) => {
                     i = i < 10 ? `0${i}` : i;
                     return (
-                      <option
-                        key={`${i}-minutes`}
-                        value={i}
-                      >
+                      <option key={`${i}-minutes`} value={i}>
                         {i}
                       </option>
                     );
                   })}
                 </select>
                 <button
-                  className={`lecture__btn ${isRecord ? 'lecture__btn--rec-on' : ''}`}
+                  className={`lecture__btn ${
+                    isRecord ? "lecture__btn--rec-on" : ""
+                  }`}
                   type="button"
                   onClick={this.onStartRecordClick}
                 >
-                  rec: {isRecord ? 'on' : 'off'}
+                  rec: {isRecord ? "on" : "off"}
                 </button>
               </section>
 
@@ -434,13 +446,19 @@ export default class App extends Component {
                   className="slide-title__input"
                   type="text"
                   placeholder="Заголовок слайда"
-                  value={savedSlides[pageNumber] ? savedSlides[pageNumber].title : ''}
+                  value={
+                    savedSlides[pageNumber] ? savedSlides[pageNumber].title : ""
+                  }
                   onChange={this.onSlideTitleChange}
                   disabled={!numPages}
                 />
 
                 <button
-                  className={`slide-title__statistic-toggle ${showStatistic ? 'slide-title__statistic-toggle--active' : null}`}
+                  className={`slide-title__statistic-toggle ${
+                    showStatistic
+                      ? "slide-title__statistic-toggle--active"
+                      : null
+                  }`}
                   type="button"
                   onClick={this.onShowStatisticClick}
                 >
@@ -459,42 +477,35 @@ export default class App extends Component {
                 fullscreen
               </button>
             </section>
-
           </section>
 
-          <section
-            className="saved-slides container"
-            hidden={!showStatistic}
-          >
+          <section className="saved-slides container" hidden={!showStatistic}>
             <h3>Выбранные слайды</h3>
-            {Object.keys(savedSlides).length ? slidesTimeItems() : <div>Ни один слайд пока не сохранён...</div>}
+            {Object.keys(savedSlides).length ? (
+              slidesTimeItems()
+            ) : (
+              <div>Ни один слайд пока не сохранён...</div>
+            )}
           </section>
-
         </header>
 
         <main className="slider container">
-          <div
-            className="slider__wrap"
-            style={{width: sliderWidth}}
-          >
+          <div className="slider__wrap" style={{ width: sliderWidth }}>
             <Document
               file={file}
               onLoadSuccess={this.onDocumentLoadSuccess}
               options={options}
-              externalLinkTarget={'_blank'}
-              className={'main-slide'}
-              inputRef={ref => this.slidesWrap = ref}
+              externalLinkTarget={"_blank"}
+              className={"main-slide"}
+              inputRef={ref => (this.slidesWrap = ref)}
             >
-              {Array.from(
-                new Array(currentPreloadCount),
-                (el, i) => (
-                  <Page
-                    key={`page-${pageNumber + i}`}
-                    pageNumber={pageNumber + i}
-                    width={sliderWidth}
-                  />
-                )
-              )}
+              {Array.from(new Array(currentPreloadCount), (el, i) => (
+                <Page
+                  key={`page-${pageNumber + i}`}
+                  pageNumber={pageNumber + i}
+                  width={sliderWidth}
+                />
+              ))}
             </Document>
           </div>
         </main>

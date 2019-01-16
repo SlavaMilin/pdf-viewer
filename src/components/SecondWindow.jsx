@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Document, Page} from 'react-pdf/dist/entry.parcel';
+import React, { Component } from "react";
+import { Document, Page } from "react-pdf/dist/entry.parcel";
 
-import './second-window.scss';
+import "./SecondWindow.scss";
 
 export default class SecondWindow extends Component {
   state = {
@@ -14,17 +14,17 @@ export default class SecondWindow extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('message', this.onReceiveMessage);
+    window.addEventListener("message", this.onReceiveMessage);
     this.calculateFitPages();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('message', this.onReceiveMessage);
+    window.removeEventListener("message", this.onReceiveMessage);
   }
 
-  onDocumentLoadSuccess = (document) => {
-    const {numPages} = document;
-    const {pageNumber} = this.state;
+  onDocumentLoadSuccess = document => {
+    const { numPages } = document;
+    const { pageNumber } = this.state;
     const renderPages = this.calculatePreloadPages(pageNumber, numPages);
 
     this.setState({
@@ -33,7 +33,7 @@ export default class SecondWindow extends Component {
     });
   };
 
-  onReceiveMessage = (e) => {
+  onReceiveMessage = e => {
     if (e.data.file) {
       this.setState({
         file: e.data.file
@@ -42,7 +42,7 @@ export default class SecondWindow extends Component {
 
     if (e.data.pageNumber) {
       const pageNumber = e.data.pageNumber;
-      const {numPages} = this.state;
+      const { numPages } = this.state;
       const renderPages = this.calculatePreloadPages(pageNumber, numPages);
 
       this.setState({
@@ -53,7 +53,7 @@ export default class SecondWindow extends Component {
   };
 
   calculateFitPages = () => {
-    const pageHeight = (this.state.slideWidth / 16 * 9);
+    const pageHeight = (this.state.slideWidth / 16) * 9;
     const windowHeight = window.screen.height;
     const fitPages = Math.ceil(windowHeight / pageHeight);
 
@@ -63,11 +63,11 @@ export default class SecondWindow extends Component {
   };
 
   calculatePreloadPages = (pageNumber, numPages) => {
-    const {fitPages} = this.state;
+    const { fitPages } = this.state;
     let pagesLeft = numPages - pageNumber;
     let renderPages = 0;
 
-    while(pagesLeft >= 0 && renderPages < fitPages) {
+    while (pagesLeft >= 0 && renderPages < fitPages) {
       renderPages++;
       pagesLeft--;
     }
@@ -76,36 +76,26 @@ export default class SecondWindow extends Component {
   };
 
   render() {
-    const {file, renderPages, pageNumber, slideWidth} = this.state;
+    const { file, renderPages, pageNumber, slideWidth } = this.state;
 
     const secondPageStyle = {
       width: slideWidth
     };
 
     return (
-      <Document
-        file={file}
-        onLoadSuccess={this.onDocumentLoadSuccess}
-      >
-        <div
-          className="second-window"
-          style={secondPageStyle}
-        >
-          {Array.from(
-            new Array(renderPages),
-            (el, i) => (
-              <Page
-                key={`page-${pageNumber + i}`}
-                pageNumber={pageNumber + i}
-                width={slideWidth}
-                renderAnnotationLayer={false}
-                renderTextLayer={false}
-              />
-            )
-          )}
+      <Document file={file} onLoadSuccess={this.onDocumentLoadSuccess}>
+        <div className="second-window" style={secondPageStyle}>
+          {Array.from(new Array(renderPages), (el, i) => (
+            <Page
+              key={`page-${pageNumber + i}`}
+              pageNumber={pageNumber + i}
+              width={slideWidth}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+            />
+          ))}
         </div>
       </Document>
     );
   }
-
 }

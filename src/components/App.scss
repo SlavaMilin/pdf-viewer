@@ -76,7 +76,7 @@ label {
   position: absolute;
   top: 4px;
   left: 18px;
-  background-image: url("../img/pdf.svg");
+  background-image: url("img/pdf.svg");
 }
 
 .controls__window-btn,
@@ -98,14 +98,14 @@ label {
   top: 0;
 }
 .controls__window-btn::before {
-  background-image: url("../img/new-window.svg");
+  background-image: url("img/new-window.svg");
   left: 12px;
 }
 .controls__sync-btn::before {
   width: 45px;
   height: 45px;
   background-size: 45px;
-  background-image: url("../img/sync.svg");
+  background-image: url("img/sync.svg");
   left: 9px;
 }
 .controls__window-btn:hover,
@@ -139,17 +139,17 @@ label {
   height: 35px;
   background-size: 35px;
   margin-top: 1px;
-  background-image: url("../img/right-arrow.svg");
+  background-image: url("img/right-arrow.svg");
 }
 .arrows__prev {
-  background-image: url("../img/right-arrow.svg");
+  background-image: url("img/right-arrow.svg");
   transform: rotate(180deg);
 }
 .arrows__last {
-  background-image: url("../img/skip.svg");
+  background-image: url("img/skip.svg");
 }
 .arrows__first {
-  background-image: url("../img/skip.svg");
+  background-image: url("img/skip.svg");
   transform: rotate(180deg);
 }
 .arrows__prev:hover,
@@ -213,7 +213,7 @@ label {
   background-size: 35px;
 }
 .lecture__btn--rec-on::after {
-  background-image: url("../img/rec.svg");
+  background-image: url("img/rec.svg");
 }
 
 //fullscreen
@@ -224,7 +224,7 @@ label {
   border: 0;
   width: 40px;
   height: 40px;
-  background: url("../img/scale-screen.svg") no-repeat;
+  background: url("img/scale-screen.svg") no-repeat;
   background-size: 40px;
 }
 .fullscreen__btn:hover,
@@ -250,11 +250,11 @@ label {
   font-size: 0;
   border: 0;
   padding: 0;
-  background: url("../img/show-more-button.svg") no-repeat;
+  background: url("img/show-more-button.svg") no-repeat;
   background-size: 26px;
 }
 .slide-title__statistic-toggle--active {
-  background-image: url("../img/show-less-fold-button.svg");
+  background-image: url("img/show-less-fold-button.svg");
 }
 
 //saved-slides
@@ -265,6 +265,6 @@ label {
   height: 10px;
   border: 0;
   padding: 0;
-  background: url("../img/cross.svg") no-repeat;
+  background: url("img/cross.svg") no-repeat;
   background-size: 10px;
 }

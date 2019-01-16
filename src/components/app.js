@@ -141,7 +141,7 @@ export default class App extends Component {
 
   onSecondWindowClick = () => {
     const {file, pageNumber} = this.state;
-    const secondWindow = window.open('./inner.html', 'secondWindow');
+    const secondWindow = window.open('./inner', 'secondWindow');
 
     if (file) {
       setTimeout(() => {
@@ -389,47 +389,43 @@ export default class App extends Component {
 
             <div className="header__lecture">
               <section className="lecture">
-                <div>
-                  <span>Старт лекции: </span>
-                  <select
-                    onChange={this.onStartLectureHoursChange}
-                    value={parseInt(startLectureHours)}
-                  >
-                    {Array.from(new Array(24), (it, i) => (
+                <span>Старт лекции: </span>
+                <select
+                  onChange={this.onStartLectureHoursChange}
+                  value={parseInt(startLectureHours)}
+                >
+                  {Array.from(new Array(24), (it, i) => (
+                    <option
+                      key={`${i}-hours`}
+                      value={i}
+                    >
+                      {i}
+                    </option>
+                  ))}
+                </select>
+                <span> : </span>
+                <select
+                  onChange={this.onStartLectureMinutesChange}
+                  value={startLectureMinutes}
+                >
+                  {Array.from(new Array(60), (it, i) => {
+                    i = i < 10 ? `0${i}` : i;
+                    return (
                       <option
-                        key={`${i}-hours`}
+                        key={`${i}-minutes`}
                         value={i}
                       >
                         {i}
                       </option>
-                    ))}
-                  </select>
-                  <span> : </span>
-                  <select
-                    onChange={this.onStartLectureMinutesChange}
-                    value={startLectureMinutes}
-                  >
-                    {Array.from(new Array(60), (it, i) => {
-                      i = i < 10 ? `0${i}` : i;
-                      return (
-                        <option
-                          key={`${i}-minutes`}
-                          value={i}
-                        >
-                          {i}
-                        </option>
-                      );
-                    })}
-                  </select>
-
-
-                </div>
+                    );
+                  })}
+                </select>
                 <button
                   className={`lecture__btn ${isRecord ? 'lecture__btn--rec-on' : ''}`}
                   type="button"
                   onClick={this.onStartRecordClick}
                 >
-                  {isRecord ? 'Выключить' : 'Включить'} запись таймингов
+                  rec: {isRecord ? 'on' : 'off'}
                 </button>
               </section>
 
@@ -453,7 +449,7 @@ export default class App extends Component {
               </section>
             </div>
 
-            <section className="fullscreen">
+            <section className="header__fullscreen fullscreen">
               <button
                 className="fullscreen__btn"
                 type="button"

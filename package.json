@@ -6,8 +6,8 @@
   "homepage": "https://SlavaMilin.github.io/presentation-viewer/",
   "scripts": {
     "test": "eslint src/**/*.js src/**/*.jsx",
-    "build": "parcel build src/index.html src/inner.html --public-url ./ -d build",
-    "start": "parcel src/index.html src/inner.html",
+    "build": "rm -r build && parcel build src/index.html src/inner.html --public-url ./ -d build",
+    "start": "rm -r dist && parcel src/index.html",
     "serve": "npm run build && serve build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -22,15 +22,22 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "eslint": "5.10.0",
-    "eslint-plugin-react": "7.11.1",
+    "eslint-config-prettier": "^3.4.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
     "gh-pages": "2.0.1",
     "parcel-bundler": "1.10.3",
+    "prettier": "^1.15.3",
     "sass": "1.15.2"
   },
   "dependencies": {
     "moment": "2.23.0",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "react-pdf": "4.0.0"
+    "react-pdf": "4.0.0",
+    "react-redux": "6.0.0",
+    "react-router-dom": "4.3.1",
+    "redux": "4.0.1",
+    "redux-devtools-extension": "2.13.7"
   }
 }
